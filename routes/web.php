@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\AboutController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Student\StudentController;
 use Illuminate\Support\Facades\Route;
@@ -43,7 +44,11 @@ Route::redirect('/contact-us', '/hubungi-kami');
 
 Route::get("/home", [HomeController::class, 'showHome'])->name('home');
 
-Route::get('/student/{id}', [StudentController::class, 'detail'])->name('students.detail');
+Route::prefix('students')->name('students.')->group(function(){
+    Route::get('/create', [StudentController::class, 'showCreate'])->name('create');
+    Route::post('/create', [StudentController::class, 'insertStudent'])->name('insert');
+    Route::get('{id}', [StudentController::class, 'detail'])->name('detail');
+});
 
 #WAJIB PAKE CONTROLLER SEMUA GABISA LANGSUNG VIEW KAYA DIATAS
 Route::get('/about', [AboutController::class, 'index'])->name('about.view');

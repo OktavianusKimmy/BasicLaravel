@@ -3,7 +3,7 @@
 @section('content')
     @include('layouts.navbar')
     <div class="container">
-        <h3>Name: {{ $data['name'] }}</h3>
+        {{-- <h3>Name: {{ $data['name'] }}</h3>
         <h4>Score:</h4>
         <ul class="list-group">
             @foreach ($data['score'] as $score)
@@ -17,7 +17,7 @@
                     else if($score >= 65) $grade = 'C';
                 @endphp
                 <li class="list-group-item">Score: {{ $score }} - Grade: {{ $grade }}</li>
-            @endforeach
+            @endforeach --}}
         </ul>
     </div>
 @endsection

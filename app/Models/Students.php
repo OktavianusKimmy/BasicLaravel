@@ -1,0 +1,37 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Students extends Model
+{
+    // 1. nama table
+    protected $table = 'students';
+
+    // 2. field apa yg bisa diisi
+    protected $fillable = [
+        'name',
+        'nim'
+    ];
+
+    // 3. table relationship
+    public function scores(){
+        return $this->hasMany(StudentScores::class, 'student_id');
+    }
+
+    // 4. custom functions
+    public function getAverage(): float{
+        if($this->relationLoaded('scores')){
+            $count = $this->scores()->count();
+            if($count == 0){
+                return 0;
+            }
+
+            return round($this->scores->avg(), 2);
+        }
+
+        return 0;
+    }
+    
+}

@@ -4,6 +4,7 @@
     @include('layouts.navbar')
     <div class="container">
         <h1>Welcome to Home Page!</h1>
+        <a href="{{ route('students.create') }}" class="btn btn-primary">Add Student</a>
         <table class="table table-bordered">
             <thead>
                 <tr>
@@ -17,8 +18,7 @@
                 {{-- {{ dd($students) }} --}}
                 @foreach ($students as $s)
                     @php
-                        $avg = array_sum($s['score']) / count($s['score'])
-                        
+                        $avg = $s->getAverage();
                     @endphp
                     <tr>
                         <td>{{ $s['id'] }}</td>
