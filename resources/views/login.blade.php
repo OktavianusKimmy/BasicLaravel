@@ -19,11 +19,7 @@
                             <label>Password</label>
                             <input name="password" type="password" class="form-control"/>
                         </div>
-                        @if (session('error_message'))
-                            <div class="alert alert-danger mt-3">
-                                {{ session('error_message') }}
-                            </div>
-                        @endif
+                        @include('components.error_message')
                         <div class="mt-2">
                             <a href="{{ route('register.view') }}" class="btn btn-secondary">Register</a>
                             <button type="submit" class="btn btn-primary">Login</button>

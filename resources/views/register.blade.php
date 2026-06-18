@@ -9,22 +9,24 @@
             <div class="col-6">
                 <div class="card p-4">
                     <h2 class="text-primary">Register</h2>
-                    <form>
+                    <form method="POST" action="{{ route('register.do') }}">
+                        @csrf
                         <div>
                             <label>Username</label>
-                            <input type="text" class="form-control"/>
+                            <input name="username" type="text" class="form-control"/>
                         </div>
                         <div>
                             <label>Password</label>
-                            <input type="password" class="form-control"/>
+                            <input name="password" type="password" class="form-control"/>
                         </div>
                         <div>
                             <label>Confirm Password</label>
-                            <input type="password" class="form-control"/>
+                            <input name="password_confirmation" type="password" class="form-control"/>
                         </div>
+                        @include('components.error_message')
                         <div class="mt-2">
                             <a href="{{ route('login.view') }}" class="btn btn-secondary">Login</a>
-                            <a href="{{ route('home') }}" class="btn btn-primary">Register</a>
+                            <button type="submit" class="btn btn-primary">Register</a>
                         </div>
                     </form>
                 </div>

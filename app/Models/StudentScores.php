@@ -8,8 +8,14 @@ class StudentScores extends Model
 {
     protected $table = 'scores';
     protected $fillable = [
+        'student_id',
+        'course_id',
         'score'
     ];
+
+    public function course(){
+        return $this->belongsTo(Courses::class, 'course_id');
+    }
 
     public function student(){
         return $this->belongsTo(Students::class, 'student_id');

@@ -22,16 +22,12 @@ class Students extends Model
 
     // 4. custom functions
     public function getAverage(): float{
-        if($this->relationLoaded('scores')){
-            $count = $this->scores()->count();
-            if($count == 0){
-                return 0;
-            }
-
-            return round($this->scores->avg(), 2);
+        $count = $this->scores->count();
+        if($count == 0){
+            return 0;
         }
 
-        return 0;
+        return round($this->scores->avg('score'), 2);
     }
     
 }

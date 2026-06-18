@@ -13,7 +13,10 @@ Route::get('/', function () {
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login.view');
 //cara lain manggil function bisa AuthController@showLogin
 
-Route::get('/register', [AuthController::class, 'showRegister'])->name('register.view');
+Route::prefix('register')->name('register.')->group(function(){
+    Route::get('/register', [AuthController::class, 'showRegister'])->name('view');
+    Route::post('/register', [AuthController::class, 'register'])->name('do');
+});
 
 Route::get('/login', function() {
     return view('login');
@@ -47,6 +50,10 @@ Route::get("/home", [HomeController::class, 'showHome'])->name('home');
 Route::prefix('students')->name('students.')->group(function(){
     Route::get('/create', [StudentController::class, 'showCreate'])->name('create');
     Route::post('/create', [StudentController::class, 'insertStudent'])->name('insert');
+    Route::get('/edit/{id}', [StudentController::class, 'showEdit'])->name('edit');
+    Route::patch('/edit/{id}', [StudentController::class, 'updateStudent'])->name('update');
+    Route::delete('/delete/{id}', [StudentController::class, 'deleteStudent'])->name('delete');
+    Route::post('/score/create', [StudentController::class, 'insertScore'])->name('score.insert');
     Route::get('{id}', [StudentController::class, 'detail'])->name('detail');
 });
 

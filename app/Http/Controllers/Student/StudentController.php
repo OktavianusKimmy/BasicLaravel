@@ -3,33 +3,19 @@
 namespace App\Http\Controllers\Student;
 
 use App\Http\Controllers\Controller;
+use App\Models\Courses;
 use App\Models\Students;
+use App\Models\StudentScores;
 use Illuminate\Http\Request;
 
 class StudentController extends Controller
 {
     public function detail($id){
-        $students = [
-            [
-                'id' => 1,
-                'name' => 'Toni Stark',
-                'score' => [90, 96, 89]
-            ],
-            [
-                'id' => 2,
-                'name' => 'Vincent Tanwiputra',
-                'score' => [70, 66, 76]
-            ],
-            [
-                'id' => 3,
-                'name' => 'Mamat RF',
-                'score' => [90, 100, 80]
-            ]
-        ];
+        $data = Students::firstWhere('id', $id);
+        $courses = Courses::get();
+        $scores = StudentScores::with('course')->where('student_id', $id)->get();
 
-        $data = collect($students)->firstWhere('id', $id);
-
-        return view('students.detail', compact('data'));
+        return view('students.detail', compact('data', 'courses', 'scores'));
     }
 
     public function showCreate(){
@@ -37,20 +23,105 @@ class StudentController extends Controller
     }
 
     public function insertStudent(Request $request){
-        $name = $request->input('student_name');
-        $nim = $request->input('student_nim');
+        $validated = $request->validate([
+            'student_name' => 'required',
+            'student_nim' => ['required', 'unique:students,nim', 'numeric', 'min:10'],
+            // 'student_image' => ['file', 'mimes:jpg', 'max:2048']
+        ]);
 
         $process = Students::create([
-            'name' => $name,
-            'nim' => $nim
+            'name' => $validated['student_name'],
+            'nim' => $validated['student_nim']
         ]);
 
         if($process){
-            return redirect()->route('home');
+            return redirect()->route('home')->with('success_message', 'Student added');
         }
         else{
+            return back()->withInput()->with('error_message', 'Unknown error');
+        }
+
+    }
+
+    public function showEdit($id){
+        if($id == 0 || $id == null){
+            return back();
+        }
+
+        $student = Students::firstWhere('id', $id);
+        return view('students.edit', compact('student'));
+    }
+
+    public function updateStudent($id, Request $request){
+        if($id == 0 || $id == null){
             return back()->withInput();
         }
 
+        $student = Students::where('id', $id)->firstOrFail();
+        if($student == null){
+            return back()->withInput();
+        }
+
+        $validated = $request->validate([
+            'student_name' => 'required',
+            'student_nim' => ['required', 'unique:students,nim', 'numeric', 'min:10']
+        ]);
+
+        $updatedData = [];
+
+        $newName = $validated['student_name'];
+        $newNim = $validated['student_nim'];
+        
+
+        if($newName != $student->name){
+            $updatedData['name'] = $newName;
+        }
+
+        if($newNim != $student->nim){
+            $updatedData['nim'] = $newNim;
+        }
+
+        if(!empty($updatedData)){
+            $student->update($updatedData);
+
+            return redirect()->route('home');
+        }
+
+        return back()->withInput();
+    }
+
+    public function deleteStudent($id){
+        if($id == 0 || $id == null){
+            return back();
+        }
+
+        $student = Students::firstWhere('id', $id);
+        if($student != null){
+            $student->delete();
+
+            return redirect()->route('home');
+        }
+
+        return back();
+    }
+
+    public function insertScore(Request $request){
+        $validated = $request->validate([
+            'student_id' => 'required',
+            'course_id' => 'required',
+            'score' => ['required', 'numeric', 'min:0', 'max:100']
+        ]);
+
+        $insertData = StudentScores::create([
+            'student_id' => $validated['student_id'],
+            'course_id' => $validated['course_id'],
+            'score' => $validated['score'],
+        ]);
+
+        if($insertData){
+            return redirect()->route('students.detail', $validated['student_id']);
+        }
+
+        return back()->withInput();
     }
 }
