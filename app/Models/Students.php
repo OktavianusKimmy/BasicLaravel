@@ -12,7 +12,8 @@ class Students extends Model
     // 2. field apa yg bisa diisi
     protected $fillable = [
         'name',
-        'nim'
+        'nim',
+        'prediction'
     ];
 
     // 3. table relationship

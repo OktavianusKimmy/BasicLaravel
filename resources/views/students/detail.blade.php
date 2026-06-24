@@ -7,6 +7,11 @@
             <div class="card-body">
                 <h2 class="h5">Name: {{ $data->name }}</h2>
                 <h2 class="h5">NIM: {{ $data->nim }}</h2>
+                <h2 class="h5">Prediction: {{ blank($data->prediction) ? '-' : ($data->prediction ? 'Gagal' : 'Lulus') }}</h2>
+                <form action="{{ route('students.predict', $data->id) }}" method="post">
+                    @csrf
+                    <button class="btn btn-sm btn-info">Predict Student</button>
+                </form>
             </div>
         </div>
         <div class="card mt-3">
@@ -25,6 +30,22 @@
                         </select>
                     </div>
                     <div class="col-md-4">
+                        <label class="form-label">Attendance Percentage (0 - 100)</label>
+                        <input type="number" min="0" max="100" name="attendance" class="form-control" required/>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Assignment (0 - 100)</label>
+                        <input type="number" min="0" max="100" name="assignment" class="form-control" required/>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Mid Exam (0 - 100)</label>
+                        <input type="number" min="0" max="100" name="mid_exam" class="form-control" required/>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Final Exam (0 - 100)</label>
+                        <input type="number" min="0" max="100" name="final_exam" class="form-control" required/>
+                    </div>
+                    <div class="col-md-4">
                         <label class="form-label">Score (0 - 100)</label>
                         <input type="number" min="0" max="100" name="score" class="form-control" required/>
                     </div>
@@ -41,6 +62,10 @@
                     <thead class="table-dark">
                         <tr>
                             <th>Course</th>
+                            <th>Attendance</th>
+                            <th>Assignment</th>
+                            <th>Mid Exam</th>
+                            <th>Final Exam</th>
                             <th>Score</th>
                             <th>Grade</th>
                             <th>Action</th>
@@ -60,6 +85,10 @@
                             
                             <tr>
                                 <td>{{ $score->course->code }} - {{ $score->course->name }}</td>
+                                <td>{{ $score->attendance }}%</td>
+                                <td>{{ $score->assignment }}</td>
+                                <td>{{ $score->mid_exam }}</td>
+                                <td>{{ $score->final_exam }}</td>
                                 <td>{{ $score->score }}</td>
                                 <td>{{ $grade }}</td>
                                 <td>Action</td>
