@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\Student\StudentController;
 use Illuminate\Support\Facades\Route;
 
@@ -57,6 +58,8 @@ Route::prefix('students')->name('students.')->group(function(){
     Route::post('/predict/{id}', [StudentController::class, 'predictScore'])->name('predict');
     Route::get('{id}', [StudentController::class, 'detail'])->name('detail');
 });
+
+Route::get('/language/{locale}', [LanguageController::class, 'switch'])->name('language.switch');
 
 #WAJIB PAKE CONTROLLER SEMUA GABISA LANGSUNG VIEW KAYA DIATAS
 Route::get('/about', [AboutController::class, 'index'])->name('about.view');

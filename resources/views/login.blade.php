@@ -8,7 +8,7 @@
 
             <div class="col-6 vh-100 d-flex justify-content-center align-items-center">
                 <div class="card p-4" style="width:450px">
-                    <h2 class="text-primary">Login</h2>
+                    <h2 class="text-primary">{{ __('main.login') }}</h2>
                     <form action="{{ route('login.do') }}" method="POST">
                         @csrf
                         <div>
@@ -21,8 +21,8 @@
                         </div>
                         @include('components.error_message')
                         <div class="mt-2">
-                            <a href="{{ route('register.view') }}" class="btn btn-secondary">Register</a>
-                            <button type="submit" class="btn btn-primary">Login</button>
+                            <a href="{{ route('register.view') }}" class="btn btn-secondary">{{ __('main.register') }}</a>
+                            <button type="submit" class="btn btn-primary">{{ __('main.login') }}</button>
                         </div>
                     </form>
                 </div>

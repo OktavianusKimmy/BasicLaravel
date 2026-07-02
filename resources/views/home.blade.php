@@ -3,7 +3,7 @@
 @section('content')
     @include('layouts.navbar')
     <div class="container">
-        <h1>Welcome to Home Page!</h1>
+        <h1>{{ __('main.welcome') }}</h1>
         @if (session('success_message'))
             <div class="alert alert-success">
                 {{ session('success_message') }}
