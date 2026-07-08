@@ -7,29 +7,30 @@ use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\Student\StudentController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
+Route::middleware('guest')->group(function(){
+    Route::get('/', function () {
+        return view('welcome');
+    });
+    
+    Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
+    //cara lain manggil function bisa AuthController@showLogin
+    
+    Route::prefix('register')->name('register.')->group(function(){
+        Route::get('/register', [AuthController::class, 'showRegister'])->name('view');
+        Route::post('/register', [AuthController::class, 'register'])->name('do');
+    });
+    
+    Route::post('/login', [AuthController::class, 'login'])->name('login.do');
+    
+    Route::get('/register', function() {
+        return view('register');
+    })->name('register.view');
+    
+    Route::post('/register')->name('register.create');
 });
 
-Route::get('/login', [AuthController::class, 'showLogin'])->name('login.view');
-//cara lain manggil function bisa AuthController@showLogin
 
-Route::prefix('register')->name('register.')->group(function(){
-    Route::get('/register', [AuthController::class, 'showRegister'])->name('view');
-    Route::post('/register', [AuthController::class, 'register'])->name('do');
-});
-
-Route::get('/login', function() {
-    return view('login');
-})->name('login.view');
-
-Route::post('/login', [AuthController::class, 'login'])->name('login.do');
-
-Route::get('/register', function() {
-    return view('register');
-})->name('register.view');
-
-Route::post('/register')->name('register.create');
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::prefix('product')->group(function() {
     Route::get('/list', function() {
@@ -46,17 +47,19 @@ Route::get('/hubungi-kami', function() {
 
 Route::redirect('/contact-us', '/hubungi-kami');
 
-Route::get("/home", [HomeController::class, 'showHome'])->name('home');
+Route::middleware('auth')->group(function(){
+    Route::get("/home", [HomeController::class, 'showHome'])->name('home');
 
-Route::prefix('students')->name('students.')->group(function(){
-    Route::get('/create', [StudentController::class, 'showCreate'])->name('create');
-    Route::post('/create', [StudentController::class, 'insertStudent'])->name('insert');
-    Route::get('/edit/{id}', [StudentController::class, 'showEdit'])->name('edit');
-    Route::patch('/edit/{id}', [StudentController::class, 'updateStudent'])->name('update');
-    Route::delete('/delete/{id}', [StudentController::class, 'deleteStudent'])->name('delete');
-    Route::post('/score/create', [StudentController::class, 'insertScore'])->name('score.insert');
-    Route::post('/predict/{id}', [StudentController::class, 'predictScore'])->name('predict');
-    Route::get('{id}', [StudentController::class, 'detail'])->name('detail');
+    Route::prefix('students')->name('students.')->group(function(){
+        Route::get('/create', [StudentController::class, 'showCreate'])->name('create');
+        Route::post('/create', [StudentController::class, 'insertStudent'])->name('insert');
+        Route::get('/edit/{id}', [StudentController::class, 'showEdit'])->name('edit');
+        Route::patch('/edit/{id}', [StudentController::class, 'updateStudent'])->name('update');
+        Route::delete('/delete/{id}', [StudentController::class, 'deleteStudent'])->name('delete');
+        Route::post('/score/create', [StudentController::class, 'insertScore'])->name('score.insert');
+        Route::post('/predict/{id}', [StudentController::class, 'predictScore'])->name('predict');
+        Route::get('{id}', [StudentController::class, 'detail'])->name('detail');
+    });
 });
 
 Route::get('/language/{locale}', [LanguageController::class, 'switch'])->name('language.switch');

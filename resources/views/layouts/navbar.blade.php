@@ -13,7 +13,10 @@
         </div>
         <div class="row col-12 justify-content-end">
             <a href="{{ route('home') }}" class="btn btn-primary col-2">{{ __('main.navbar.home') }}</a>
-            <a href="{{ route('login.view') }}" class="btn btn-danger col-2">{{ __('main.navbar.logout') }}</a>
+            <form class="col-2" action="{{ route('logout') }}" method="post">
+                @csrf
+                <button class="btn btn-danger">{{ __('main.navbar.logout') }}</button>
+            </form>
         </div>
     </div>
 </div>

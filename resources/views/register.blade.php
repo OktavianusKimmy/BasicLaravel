@@ -12,8 +12,12 @@
                     <form method="POST" action="{{ route('register.do') }}">
                         @csrf
                         <div>
-                            <label>Username</label>
-                            <input name="username" type="text" class="form-control"/>
+                            <label>Email</label>
+                            <input name="email" type="text" class="form-control"/>
+                        </div>
+                        <div>
+                            <label>Name</label>
+                            <input name="name" type="text" class="form-control"/>
                         </div>
                         <div>
                             <label>Password</label>
@@ -25,7 +29,7 @@
                         </div>
                         @include('components.error_message')
                         <div class="mt-2">
-                            <a href="{{ route('login.view') }}" class="btn btn-secondary">Login</a>
+                            <a href="{{ route('login') }}" class="btn btn-secondary">Login</a>
                             <button type="submit" class="btn btn-primary">Register</a>
                         </div>
                     </form>

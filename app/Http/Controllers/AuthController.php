@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules\Password;
 
 class AuthController extends Controller
@@ -15,7 +18,7 @@ class AuthController extends Controller
         // $username = $request->input('username');
         // $password = $request->input('password');
         $validated = $request->validate([
-            'username' => 'required|email',
+            'email' => 'required|email',
             'password' => ['required',
                 // 'regex:/[A-Z][a-z]/',
                 Password::min(6)
@@ -26,11 +29,18 @@ class AuthController extends Controller
                 ]
         ],
         [
-            'username.required' => 'username ga boleh kosong!!!'
+            'email.required' => 'email ga boleh kosong!!!'
         ]);
 
-        return redirect()->route('home');
+        if(Auth::attempt($validated)){
+            $request->session()->regenerate();
+            session([
+                'role' => 'Superadmin'
+            ]);
+            return redirect()->route('home');
+        }
         
+        return back()->with('error_message', 'wrong email or password');
     }
 
     public function showRegister(){
@@ -39,10 +49,25 @@ class AuthController extends Controller
 
     public function register(Request $request){
         $validated = $request->validate([
-            'username' => ['required', 'email'],
+            'email' => ['required', 'email'],
+            'name' => ['required'],
             'password' => ['required', 'confirmed']
         ]);
 
-        return redirect()->route('home');
+        User::create([
+            'name' => $validated['name'],
+            'email' => $validated['email'],
+            'password' => Hash::make($validated['password'])
+        ]);
+
+        return redirect()->route('login.view');
+    }
+
+    public function logout(Request $request){
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerate();
+
+        return redirect()->route('login');
     }
 }

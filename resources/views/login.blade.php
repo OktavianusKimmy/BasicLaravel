@@ -12,8 +12,8 @@
                     <form action="{{ route('login.do') }}" method="POST">
                         @csrf
                         <div>
-                            <label>Username</label>
-                            <input value="{{ old('username') }}" name="username" type="text" class="form-control"/>
+                            <label>Email</label>
+                            <input value="{{ old('email') }}" name="email" type="text" class="form-control"/>
                         </div>
                         <div>
                             <label>Password</label>

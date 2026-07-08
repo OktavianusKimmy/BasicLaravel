@@ -3,7 +3,8 @@
 @section('content')
     @include('layouts.navbar')
     <div class="container">
-        <h1>{{ __('main.welcome') }}</h1>
+        <h1>{{ __('main.welcome') }} {{ Auth::user()->name }}</h1>
+        <h3>Role: {{ session('role') }}</h3>
         @if (session('success_message'))
             <div class="alert alert-success">
                 {{ session('success_message') }}
