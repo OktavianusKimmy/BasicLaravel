@@ -19,14 +19,7 @@ class AuthController extends Controller
         // $password = $request->input('password');
         $validated = $request->validate([
             'email' => 'required|email',
-            'password' => ['required',
-                // 'regex:/[A-Z][a-z]/',
-                Password::min(6)
-                    ->max(20)
-                    ->mixedCase()
-                    ->symbols()
-                    ->numbers()
-                ]
+            'password' => ['required']
         ],
         [
             'email.required' => 'email ga boleh kosong!!!'
@@ -51,7 +44,13 @@ class AuthController extends Controller
         $validated = $request->validate([
             'email' => ['required', 'email'],
             'name' => ['required'],
-            'password' => ['required', 'confirmed']
+            'password' => ['required', 'confirmed',
+                Password::min(6)
+                    ->max(20)
+                    ->mixedCase()
+                    ->symbols()
+                    ->numbers()
+                ]
         ]);
 
         User::create([
