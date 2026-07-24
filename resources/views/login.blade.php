@@ -6,7 +6,7 @@
             <div class="col-md-6 d-none d-md-flex align-items-center justify-content-center"
                 style="background: linear-gradient(135deg,#0d6efd,#6f42c1);">
                 <div class="text-center text-white px-5">
-                    <h1 class="fw-bold">{{ __('main.welcomeBack') }}</h1>
+                    <h1 class="fw-bold">{{ __('main.studentManager') }}</h1>
                     <p>{{ __('main.loginUntukAkses') }}</p>
                 </div>
             </div>

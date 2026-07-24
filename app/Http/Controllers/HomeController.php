@@ -10,6 +10,10 @@ class HomeController extends Controller
     public function showHome(){
         $students = Students::get();
 
-        return view('home', compact('students'));
+        $totalStudent = $students->count();
+        $passed = $students->filter(fn($s)=>$s->getAverage()>=65)->count();
+        $failed = $students->filter(fn($s)=>$s->getAverage()<65)->count();
+
+        return view('home', compact('students', 'totalStudent', 'passed', 'failed'));
     }
 }

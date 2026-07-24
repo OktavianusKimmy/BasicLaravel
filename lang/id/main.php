@@ -8,7 +8,7 @@ return [
         "logout" => "Keluar"
         ],
     "welcome" => "Selamat Datang di Halaman Beranda!",
-    "welcomeBack" => "Selamat Datang Kembali",
+    "studentManager" => "Student Manager",
     "loginUntukAkses" => "Login untuk mengakses website ini.",
     "masukkanEmaildanPass" => "Masukkan Email dan Password anda",
     "belumPunyaAkun" => "Belum punya akun?",
@@ -24,5 +24,21 @@ return [
     "nama" => "Nama",
     "password" => "Password",
     "konfirmasiPassword" => "Konfirmasi Password",
-    "sudahPunyaAkun" => "Sudah punya akun?"
+    "sudahPunyaAkun" => "Sudah punya akun?",
+
+    "peran" => "Peran",
+    "listMhs" => "List Mahasiswa",
+    "tambahMhs" => "Tambah Mahasiswa",
+    "totalStudent" => "Total Mahasiswa",
+    "passed" => "Lulus",
+    "failed" => "Gagal",
+    "average" => "Nilai Rata-Rata",
+    "aksi" => "Aksi",
+
+    "fillStudInfo" => "Isilah informasi mahasiswa di bawah ini",
+    "studName" => "Nama Mahasiswa",
+    "enterStudName" => "Masukkan Nama Mahasiswa",
+    "studNim" => "NIM Mahasiswa",
+    "enterStudNim" => "Masukkan NIM Mahasiswa",
+    "back" => "Kembali",
 ];
