@@ -41,4 +41,10 @@ return [
     "studNim" => "NIM Mahasiswa",
     "enterStudNim" => "Masukkan NIM Mahasiswa",
     "back" => "Kembali",
+
+    "editStud" => "Ubah Data Mahasiswa",
+    "updateStudBelow" => "Perbarui informasi mahasiswa di bawah ini",
+    "saveChanges" => "Simpan Perubahan",
+
+    "delStud" => "Hapus data mahasiswa",
 ];

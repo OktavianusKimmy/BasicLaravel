@@ -41,4 +41,10 @@ return [
     "studNim" => "Student NIM",
     "enterStudNim" => "Enter Student NIM",
     "back" => "Back",
+
+    "editStud" => "Edit Student's Data",
+    "updateStudBelow" => "Update the student information below",
+    "saveChanges" => "Save Changes",
+
+    "delStud" => "Delete student data",
 ];
