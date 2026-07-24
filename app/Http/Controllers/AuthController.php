@@ -60,7 +60,7 @@ class AuthController extends Controller
             'password' => Hash::make($validated['password'])
         ]);
 
-        return redirect()->route('login.view');
+        return redirect()->route('login');
     }
 
     public function logout(Request $request){
