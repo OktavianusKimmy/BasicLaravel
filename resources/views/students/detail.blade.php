@@ -3,54 +3,78 @@
 @section('content')
     @include('layouts.navbar')
     <div class="container">
-        <div class="card mt-3">
+        <div class="card shadow-sm border-0 mb-4 mt-4">
             <div class="card-body">
-                <h2 class="h5">Name: {{ $data->name }}</h2>
-                <h2 class="h5">NIM: {{ $data->nim }}</h2>
-                <h2 class="h5">Prediction: {{ blank($data->prediction) ? '-' : ($data->prediction ? 'Gagal' : 'Lulus') }}</h2>
-                <form action="{{ route('students.predict', $data->id) }}" method="post">
-                    @csrf
-                    <button class="btn btn-sm btn-info">Predict Student</button>
-                </form>
+                <div class="row align-items-center">
+                    <div class="col-md-8">
+                        <h3 class="fw-bold mb-3">
+                            {{ $data->name }}
+                        </h3>
+                        <p class="mb-1">
+                            <strong>NIM :</strong>
+                            {{ $data->nim }}
+                        </p>
+                    </div>
+                    <div class="col-md-4 text-md-end">
+                        @if(blank($data->prediction))
+                            <span class="badge bg-secondary fs-6">
+                                {{ __('main.belumPrediksi') }}
+                            </span>
+                        @elseif($data->prediction)
+                            <span class="badge bg-danger fs-6">
+                                {{ __('main.failed') }}
+                            </span>
+                        @else
+                            <span class="badge bg-success fs-6">
+                                {{ __('main.passed') }}
+                            </span>
+                        @endif
+                        <div class="mt-3">
+                            <form action="{{ route('students.predict',$data->id) }}" method="POST">
+                                @csrf
+                                <button
+                                    class="btn btn-info">
+                                    {{ __('main.predStud') }}
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="card mt-3">
             <div class="card-body">
-                <h2 class="h5">Add Score</h2>
+                <h2 class="h5">{{ __('main.addScore') }}</h2>
                 <form action="{{ route('students.score.insert') }}" method="post" class="row mt-2">
                     @csrf
                     <input name="student_id" type="hidden" value="{{ $data->id }}"/>
                     <div class="col-md-4">
-                        <label class="form-label">Course</label>
+                        <label class="form-label">{{ __('main.course') }}</label>
                         <select name="course_id" class="form-control" required>
-                            <option value="" disabled selected>-- Select Course --</option>
+                            <option value="" disabled selected>-- {{ __('main.selectCourse') }} --</option>
                             @foreach ($courses as $course)
                                 <option value="{{ $course->id }}">{{ $course->code }} - {{ $course->name }} </option>
                             @endforeach
                         </select>
                     </div>
                     <div class="col-md-4">
-                        <label class="form-label">Attendance Percentage (0 - 100)</label>
+                        <label class="form-label">{{ __('main.attPercentage') }} (0 - 100)</label>
                         <input type="number" min="0" max="100" name="attendance" class="form-control" required/>
                     </div>
                     <div class="col-md-4">
-                        <label class="form-label">Assignment (0 - 100)</label>
+                        <label class="form-label">{{ __('main.asg') }} (0 - 100)</label>
                         <input type="number" min="0" max="100" name="assignment" class="form-control" required/>
                     </div>
                     <div class="col-md-4">
-                        <label class="form-label">Mid Exam (0 - 100)</label>
+                        <label class="form-label">{{ __('main.midExam') }} (0 - 100)</label>
                         <input type="number" min="0" max="100" name="mid_exam" class="form-control" required/>
                     </div>
                     <div class="col-md-4">
-                        <label class="form-label">Final Exam (0 - 100)</label>
+                        <label class="form-label">{{ __('main.finalExam') }} (0 - 100)</label>
                         <input type="number" min="0" max="100" name="final_exam" class="form-control" required/>
                     </div>
-                    <div class="col-md-4">
-                        <label class="form-label">Score (0 - 100)</label>
-                        <input type="number" min="0" max="100" name="score" class="form-control" required/>
-                    </div>
                     <div class="col-12 mt-3">
-                        <button type="submit" class="btn btn-success">Add Score</button>
+                        <button type="submit" class="btn btn-primary">{{ __('main.addScore') }}</button>
                     </div>
                 </form>
             </div>
@@ -61,14 +85,14 @@
                 <table class="table table-striped">
                     <thead class="table-dark">
                         <tr>
-                            <th>Course</th>
-                            <th>Attendance</th>
-                            <th>Assignment</th>
-                            <th>Mid Exam</th>
-                            <th>Final Exam</th>
-                            <th>Score</th>
-                            <th>Grade</th>
-                            <th>Action</th>
+                            <th>{{ __('main.course') }}</th>
+                            <th>{{ __('main.attPercentage') }}</th>
+                            <th>{{ __('main.asg') }}</th>
+                            <th>{{ __('main.midExam') }}</th>
+                            <th>{{ __('main.finalExam') }}</th>
+                            <th>{{ __('main.score') }}</th>
+                            <th>{{ __('main.grade') }}</th>
+                            <th>{{ __('main.action') }}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -91,7 +115,16 @@
                                 <td>{{ $score->final_exam }}</td>
                                 <td>{{ $score->score }}</td>
                                 <td>{{ $grade }}</td>
-                                <td>Action</td>
+                                <td class="d-flex gap-2">
+                                    <a href="{{ route('students.score.edit',$score->id) }}" class="btn btn-sm btn-outline-warning">
+                                        {{ __('main.edit') }}
+                                    </a>
+                                    <form action="{{ route('students.score.delete',$score->id) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="btn btn-sm btn-outline-danger" onclick="return confirm('Delete student data')">{{ __('main.delete') }}</button>
+                                    </form>
+                                </td>
                             </tr>
                         @endforeach
                     </tbody>

@@ -13,8 +13,9 @@ class StudentController extends Controller
 {
     public function detail($id){
         $data = Students::where('id', $id)->first();
-        $courses = Courses::get();
         $scores = StudentScores::with('course')->where('student_id', $id)->get();
+        $usedCourseIds = StudentScores::where('student_id', $data->id)->pluck('course_id');
+        $courses = Courses::whereNotIn('id', $usedCourseIds)->get();
 
         return view('students.detail', compact('data', 'courses', 'scores'));
     }
@@ -104,34 +105,6 @@ class StudentController extends Controller
         }
 
         return back();
-    }
-
-    public function insertScore(Request $request){
-        $validated = $request->validate([
-            'student_id' => 'required',
-            'course_id' => 'required',
-            'score' => ['required', 'numeric', 'min:0', 'max:100'],
-            'attendance' => ['required', 'numeric', 'min:0', 'max:100'],
-            'assignment' => ['required', 'numeric', 'min:0', 'max:100'],
-            'mid_exam' => ['required', 'numeric', 'min:0', 'max:100'],
-            'final_exam' => ['required', 'numeric', 'min:0', 'max:100']
-        ]);
-
-        $insertData = StudentScores::create([
-            'student_id' => $validated['student_id'],
-            'course_id' => $validated['course_id'],
-            'score' => $validated['score'],
-            'attendance' => $validated['attendance'],
-            'assignment' => $validated['assignment'],
-            'mid_exam' => $validated['mid_exam'],
-            'final_exam' => $validated['final_exam']
-        ]);
-
-        if($insertData){
-            return redirect()->route('students.detail', $validated['student_id']);
-        }
-
-        return back()->withInput();
     }
 
     public function predictScore($id, StudentPredictionService $service){

@@ -35,7 +35,7 @@
                         </div>
                         <div class="d-flex justify-content-between">
                             <a href="{{ route('home') }}" class="btn btn-outline-secondary">
-                                ← {{ __('main.back') }}
+                                {{ __('main.back') }}
                             </a>
                             <button type="submit" class="btn btn-warning text-white">
                                 {{ __('main.saveChanges') }}

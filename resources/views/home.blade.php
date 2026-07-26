@@ -99,12 +99,12 @@
                                 </td>
                                 <td class="d-flex gap-2">
                                     <a href="{{ route('students.edit',$s->id) }}" class="btn btn-sm btn-outline-warning">
-                                        Edit
+                                        {{ __('main.edit') }}
                                     </a>
                                     <form action="{{ route('students.delete',$s->id) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
-                                        <button class="btn btn-sm btn-outline-danger" onclick="return confirm('Delete student data')">Delete</button>
+                                        <button class="btn btn-sm btn-outline-danger" onclick="return confirm('Delete student data')">{{ __('main.delete') }}</button>
                                     </form>
                                 </td>
                             </tr>

@@ -13,6 +13,23 @@
 
             <div class="col-md-6 vh-100 d-flex align-items-center justify-content-center bg-light">
                 <div class="card shadow-lg border-0 rounded-4 p-5" style="width:430px;">
+                    <div class="d-flex justify-content-end mb-2">
+                        <div class="btn-group btn-group-sm" role="group">
+                            <a href="{{ route('language.switch','id') }}"
+                                class="btn btn-sm {{ app()->getLocale() == 'id'
+                                    ? 'btn-primary'
+                                    : 'btn-light border' }}">
+                                ID
+                            </a>
+                            <a href="{{ route('language.switch','en') }}"
+                                class="btn btn-sm {{ app()->getLocale() == 'en'
+                                    ? 'btn-primary'
+                                    : 'btn-light border' }}">
+                                EN
+                            </a>
+                        </div>
+                    </div>
+
                     <h2 class="text-center fw-bold text-primary">
                         {{ __('main.login') }}
                     </h2>

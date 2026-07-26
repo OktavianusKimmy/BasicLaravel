@@ -47,4 +47,22 @@ return [
     "saveChanges" => "Save Changes",
 
     "delStud" => "Delete student data",
+
+    "belumPrediksi" => "Not Predicted yet",
+    "predStud" => "Predict Student",
+    "addScore" => "Add Score",
+    "course" => "Course",
+    "selectCourse" => "Select Course",
+    "attPercentage" => "Attendance Percentage",
+    "asg" => "Assignment",
+    "midExam" => "Mid Exam",
+    "finalExam" => "Final Exam",
+    "score" => "Score",
+    "grade" => "Grade",
+    "action" => "Action",
+
+    "editScore" => "Edit Score",
+    "update" => "Update",
+    "edit" => "Edit",
+    "delete" => "Delete",    
 ];

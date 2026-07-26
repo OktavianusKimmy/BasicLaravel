@@ -47,4 +47,22 @@ return [
     "saveChanges" => "Simpan Perubahan",
 
     "delStud" => "Hapus data mahasiswa",
+
+    "belumPrediksi" => "Belum Diprediksi",
+    "predStud" => "Prediksi Mahasiswa",
+    "addScore" => "Tambah Nilai",
+    "course" => "Mata Kuliah",
+    "selectCourse" => "Pilih Mata Kuliah",
+    "attPercentage" => "Persentase Kehadiran",
+    "asg" => "Tugas",
+    "midExam" => "UTS",
+    "finalExam" => "UAS",
+    "score" => "Skor",
+    "grade" => "Nilai",
+    "action" => "Aksi",
+
+    "editScore" => "Ubah Nilai",
+    "update" => "Perbarui",
+    "edit" => "Ubah",
+    "delete" => "Hapus",
 ];
