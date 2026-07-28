@@ -4,13 +4,14 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LanguageController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Student\StudentController;
 use App\Http\Controllers\Student\StudentScoreContoller;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function(){
     Route::get('/', function () {
-        return view('welcome');
+        return view('login');
     });
     
     Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
@@ -32,6 +33,10 @@ Route::middleware('guest')->group(function(){
 
 
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
+Route::patch('/profile/name', [ProfileController::class, 'updateName'])->name('profile.name');
+Route::patch('/profile/email', [ProfileController::class, 'updateEmail'])->name('profile.email');
+Route::patch('/profile/password', [ProfileController::class, 'updatePassword'])->name('profile.password');
 
 Route::prefix('product')->group(function() {
     Route::get('/list', function() {

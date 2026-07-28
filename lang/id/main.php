@@ -5,7 +5,8 @@ return [
     "register" => "Daftar",
     "navbar" => [
         "home" => "Beranda",
-        "logout" => "Keluar"
+        "logout" => "Keluar",
+        "profile" => "Profil"
         ],
     "welcome" => "Selamat Datang di Halaman Beranda!",
     "studentManager" => "Student Manager",

@@ -5,7 +5,8 @@ return [
     "register" => "Register",
     "navbar" => [
         "home" => "Home",
-        "logout" => "Logout"
+        "logout" => "Logout",
+        "profile" => "Profile"
     ],
     "welcome" => "Welcome to Home Page!",
     "studentManager" => "Student Manager",
