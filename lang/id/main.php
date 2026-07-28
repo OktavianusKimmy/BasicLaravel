@@ -5,7 +5,6 @@ return [
     "register" => "Daftar",
     "navbar" => [
         "home" => "Beranda",
-        "logout" => "Keluar",
         "profile" => "Profil"
         ],
     "welcome" => "Selamat Datang di Halaman Beranda!",
@@ -66,4 +65,16 @@ return [
     "update" => "Perbarui",
     "edit" => "Ubah",
     "delete" => "Hapus",
+
+    "language" => "Bahasa",
+    "editName" => "Ubah Nama",
+    "updateName" => "Perbarui Nama",
+    "editEmail" => "Ubah Email",
+    "updateEmail" => "Perbarui Email",
+    "changePass" => "Ubah Password",
+    "currPass" => "Password Sekarang",
+    "newPass" => "Password Baru",
+    "confirmPass" => "Konfirmasi Password",
+    "updatePass" => "Perbarui Password",
+    "logout" => "Keluar"
 ];

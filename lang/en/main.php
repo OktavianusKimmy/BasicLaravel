@@ -5,7 +5,6 @@ return [
     "register" => "Register",
     "navbar" => [
         "home" => "Home",
-        "logout" => "Logout",
         "profile" => "Profile"
     ],
     "welcome" => "Welcome to Home Page!",
@@ -65,5 +64,17 @@ return [
     "editScore" => "Edit Score",
     "update" => "Update",
     "edit" => "Edit",
-    "delete" => "Delete",    
+    "delete" => "Delete",
+
+    "language" => "Language",
+    "editName" => "Edit Name",
+    "updateName" => "Update Name",
+    "editEmail" => "Edit Email",
+    "updateEmail" => "Update Email",
+    "changePass" => "Change Password",
+    "currPass" => "Current Password",
+    "newPass" => "New Password",
+    "confirmPass" => "Confirm Password",
+    "updatePass" => "Update Password",
+    "logout" => "Logout"
 ];

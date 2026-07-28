@@ -7,8 +7,8 @@
 <div class="container py-4">
 
     <div class="card shadow-sm border-0 mb-4">
-        <div class="card-header bg-warning text-black">
-            <h4 class="mb-0">Profile</h4>
+        <div class="card-header bg-warning text-white">
+            <h4 class="mb-0">{{ __('main.navbar.profile') }}</h4>
         </div>
 
         <div class="card-body">
@@ -29,7 +29,7 @@
                     </p>
 
                     <p class="mb-0">
-                        <strong>Role :</strong>
+                        <strong>{{ __('main.peran') }} :</strong>
                         {{ session('role') }}
                     </p>
                 </div>
@@ -39,7 +39,7 @@
 
     <div class="card shadow-sm border-0 mb-4">
         <div class="card-header bg-primary text-white">
-            <h5 class="mb-0">Language</h5>
+            <h5 class="mb-0">{{ __('main.language') }}</h5>
         </div>
         <div class="card-body">
             <div class="btn-group">
@@ -55,16 +55,16 @@
 
     <div class="card shadow-sm border-0 mb-4">
         <div class="card-header bg-primary text-white">
-            <h5 class="mb-0">Edit Name</h5>
+            <h5 class="mb-0">{{ __('main.editName') }}</h5>
         </div>
         <div class="card-body">
             <form action="{{ route('profile.name') }}" method="POST">
                 @csrf
                 @method('PATCH')
-                <label class="form-label">Name</label>
+                <label class="form-label">{{ __('main.nama') }}</label>
                 <input type="text" name="name" value="{{ old('name',Auth::user()->name) }}" class="form-control">
                 <button class="btn btn-primary mt-3">
-                    Update Name
+                    {{ __('main.updateName') }}
                 </button>
             </form>
         </div>
@@ -72,7 +72,7 @@
 
     <div class="card shadow-sm border-0 mb-4">
         <div class="card-header bg-primary text-white">
-            <h5 class="mb-0">Edit Email</h5>
+            <h5 class="mb-0">{{ __('main.editEmail') }}</h5>
         </div>
         <div class="card-body">
             <form action="{{ route('profile.email') }}" method="POST">
@@ -81,7 +81,7 @@
                 <label class="form-label">Email</label>
                 <input type="email" name="email" value="{{ old('email',Auth::user()->email) }}" class="form-control">
                 <button class="btn btn-primary text-white mt-3">
-                    Update Email
+                    {{ __('main.updateEmail') }}
                 </button>
             </form>
         </div>
@@ -89,7 +89,7 @@
 
     <div class="card shadow-sm border-0">
         <div class="card-header bg-primary text-white">
-            <h5 class="mb-0">Change Password</h5>
+            <h5 class="mb-0">{{ __('main.changePass') }}</h5>
         </div>
         <div class="card-body">
             <form action="{{ route('profile.password') }}" method="POST">
@@ -98,24 +98,24 @@
                 @include('components.error_message')
                 <div class="mb-3">
                     <label class="form-label">
-                        Current Password
+                        {{ __('main.currPass') }}
                     </label>
                     <input type="password" name="current_password" class="form-control">
                 </div>
                 <div class="mb-3">
                     <label class="form-label">
-                        New Password
+                        {{ __('main.newPass') }}
                     </label>
                     <input type="password" name="password" class="form-control">
                 </div>
                 <div class="mb-3">
                     <label class="form-label">
-                        Confirm Password
+                        {{ __('main.confirmPass') }}
                     </label>
                     <input type="password" name="password_confirmation" class="form-control">
                 </div>
                 <button class="btn btn-primary">
-                    Update Password
+                    {{ __('main.updatePass') }}
                 </button>
             </form>
         </div>
@@ -126,7 +126,7 @@
             @csrf
             <button type="submit" class="btn btn-outline-danger px-4" onclick="return confirm('Are you sure you want to logout?')">
                 <i class="bi bi-box-arrow-right"></i>
-                Logout
+                {{ __('main.logout') }}
             </button>
         </form>
     </div>
